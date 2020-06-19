@@ -1,0 +1,28 @@
+def FCFS():
+        global RunningState
+        global Bloqueados
+        global Prontos
+        if(RunningState==None):
+            if(len(Prontos)==0):
+                flag=fim()
+                if(flag==0):
+                    print("FCFS-->Final")
+                    return 1
+                if flag==2:
+                    for i in range(len(Bloqueados)):
+                        a=Bloqueados[i]
+                        if(a.pai==0):
+                            a.estado=1
+                            Prontos.append(a)
+                            alterar_Pcb(a)
+                            Bloqueados.pop(i)
+                            break
+                    prontos_correr()
+                    return 0
+            else:
+                prontos_correr()
+                return 0
+        else:
+            instrucao=Memory[(RunningState.pc)]
+            validacao(realizar_instrucao(instrucao))
+            return 
